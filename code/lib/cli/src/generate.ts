@@ -261,7 +261,11 @@ command('build')
       configDir: 'SBCONFIG_CONFIG_DIR',
     });
 
-    await build({ ...options, packageJson: pkg }).catch(() => process.exit(1));
+    await build({ ...options, packageJson: pkg })
+      .catch(() => process.exit(1))
+      .finally(() => {
+        process.exit(1);
+      });
   });
 
 program.on('command:*', ([invalidCmd]) => {

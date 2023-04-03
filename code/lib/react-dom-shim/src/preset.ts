@@ -1,4 +1,5 @@
 import type { Options } from '@storybook/types';
+import type { BuildOptions } from 'esbuild';
 // @ts-expect-error react-dom doesn't have this in export maps in v16, messing up TS
 import { version } from 'react-dom/package.json';
 
@@ -18,6 +19,20 @@ export const webpackFinal = async (config: any, options: Options) => {
         ...config.resolve?.alias,
         '@storybook/react-dom-shim': '@storybook/react-dom-shim/dist/react-18',
       },
+    },
+  };
+};
+
+export const esbuildFinal = async (config: BuildOptions) => {
+  const isReact18 = version.startsWith('18') || version.startsWith('0.0.0');
+
+  if (!isReact18) return config;
+
+  return {
+    ...config,
+    alias: {
+      ...config.alias,
+      '@storybook/react-dom-shim': '@storybook/react-dom-shim/dist/react-18',
     },
   };
 };

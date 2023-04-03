@@ -1,0 +1,111 @@
+{
+  "name": "@storybook/builder-esbuild",
+  "version": "7.0.1",
+  "description": "Storybook framework-agnostic API",
+  "keywords": [
+    "storybook"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/main/lib/core",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "directory": "lib/builder-esbuild"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/storybook"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "node": "./dist/index.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./presets/custom-preset": {
+      "node": "./dist/presets/custom-preset.js",
+      "require": "./dist/presets/custom-preset.js",
+      "import": "./dist/presets/custom-preset.mjs",
+      "types": "./dist/presets/custom-preset.d.ts"
+    },
+    "./presets/preview-preset": {
+      "node": "./dist/presets/preview-preset.js",
+      "require": "./dist/presets/preview-preset.js",
+      "import": "./dist/presets/preview-preset.mjs",
+      "types": "./dist/presets/preview-preset.d.ts"
+    },
+    "./templates/virtualModuleModernEntry.js.handlebars": "./templates/virtualModuleModernEntry.js.handlebars",
+    "./templates/preview.ejs": "./templates/preview.ejs",
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "templates/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "check": "../../../scripts/node_modules/.bin/tsc --noEmit",
+    "prep": "../../../scripts/prepare/bundle.ts"
+  },
+  "dependencies": {
+    "@craftamap/esbuild-plugin-html": "^0.5.0",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+    "@fal-works/esbuild-plugin-global-externals": "^2.1.2",
+    "@storybook/api": "^7.0.0",
+    "@storybook/channel-websocket": "^7.0.0",
+    "@storybook/core-common": "^7.0.0",
+    "@storybook/mdx2-csf": "^1.0.0",
+    "@storybook/node-logger": "^7.0.0",
+    "@storybook/preview": "^7.0.0",
+    "@storybook/preview-api": "^7.0.0",
+    "esbuild": "^0.17.14",
+    "esbuild-plugin-raw": "^0.1.7",
+    "esbuild-plugin-ts-checker": "^1.0.2",
+    "escape-string-regexp": "^5.0.0",
+    "express": "^4.18.2",
+    "fs-extra": "^11.1.1",
+    "pretty-hrtime": "^1.0.3",
+    "remark-external-links": "^8.0.0",
+    "remark-slug": "^6.0.0",
+    "slash": "^5.0.0",
+    "ts-dedent": "^2.2.0"
+  },
+  "devDependencies": {
+    "@hyrious/esbuild-plugin-style": "^0.3.5",
+    "@storybook/mdx1-csf": ">=1.0.0-next.1",
+    "glob": "^9.3.4"
+  },
+  "peerDependencies": {
+    "@storybook/mdx1-csf": ">=1.0.0-next.1"
+  },
+  "peerDependenciesMeta": {
+    "@storybook/mdx1-csf": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "entries": [
+      "./src/index.ts",
+      "./src/presets/custom-preset.ts",
+      "./src/presets/preview-preset.ts"
+    ],
+    "platform": "node"
+  },
+  "gitHead": "dd10adf7821c47f0d3a2e6a45d80eea2b906c3a2"
+}
