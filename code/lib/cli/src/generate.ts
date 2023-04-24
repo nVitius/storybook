@@ -22,6 +22,7 @@ import { dev } from './dev';
 import { build } from './build';
 import { parseList, getEnvConfig } from './utils';
 import versions from './versions';
+import { doctor } from './doctor';
 
 addToGlobalContext('cliVersion', versions.storybook);
 
@@ -162,7 +163,7 @@ command('link <repo-url-or-directory>')
   );
 
 command('automigrate [fixId]')
-  .description('Check storybook for known problems or migrations and apply fixes')
+  .description('Check storybook for incompatibilities or migrations and apply fixes')
   .option('-y --yes', 'Skip prompting the user')
   .option('-n --dry-run', 'Only check for fixes, do not actually run them')
   .option('--package-manager <npm|pnpm|yarn1|yarn2>', 'Force package manager')
@@ -176,6 +177,17 @@ command('automigrate [fixId]')
   )
   .action(async (fixId, options) => {
     await automigrate({ fixId, ...options }).catch((e) => {
+      logger.error(e);
+      process.exit(1);
+    });
+  });
+
+command('doctor')
+  .description('Check storybook for known problems and provide suggestions or fixes')
+  .option('--package-manager <npm|pnpm|yarn1|yarn2>', 'Force package manager')
+  .option('-c, --config-dir <dir-name>', 'Directory of Storybook configurations to migrate')
+  .action(async (options) => {
+    await doctor(options).catch((e) => {
       logger.error(e);
       process.exit(1);
     });
